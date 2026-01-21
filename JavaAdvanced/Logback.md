@@ -148,11 +148,52 @@ If we store all event logs in one file, the longer the file will be the bigger. 
 </root>
 ```
 
+
 The class used is RollingFileAppender. rollingPolicy uses SizeAndTimeBasedRollingPolicy so we can use size as well as time. 
 fileNamePattern for setting file name pattern, every day logback will create a new file with pattern application-
 `%d{yyyy-MM-dd}.%i.log, %i` function as increment. maxFileSize for setting the maximum size of the file, if it exceeds the maximum 
 size then the logback will create a new file. maxHistory to specify the number of days. totalSizeCap for setting the total maximum 
 size of the event log file.
+
+
+### Overall Config
+
+```
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<configuration scan="true" scanPeriod="30 seconds">
+    <property name ="LOG_PATH"  value="logs/"/>
+
+        <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+
+            <encoder>
+                <pattern>
+                    %d{HH:mm:ss:SSS} [%thread] %-5level %logger{36} - %msg%n
+                </pattern>
+            </encoder>
+        </appender>
+
+        <appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+            <file>${LOG_PATH}/app.log</file>
+            <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+                <fileNamePattern>${LOG_PATH}/application-%d{yyyy-MM-dd}.log</fileNamePattern>
+                <maxHistory>1</maxHistory>
+            </rollingPolicy>
+            <encoder>
+                <pattern>
+                    %d{HH:mm:ss:SSS} [%thread] %-5level %logger{40} - %msg%n
+                </pattern>
+            </encoder>
+        </appender>
+
+    <root level = "WARN">
+        <appender-ref ref="CONSOLE"></appender-ref>
+        <appender-ref ref="FILE"></appender-ref>
+    </root>
+
+
+</configuration>
+```
 
 **1.3. Layout**
 
