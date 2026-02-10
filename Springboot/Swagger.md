@@ -47,11 +47,11 @@ Swagger solves real problems:
 
 ## 4. Spring Boot Swagger Options
 
-### ❌ Deprecated
+###  Deprecated
 
 * Springfox Swagger 2 / 3
 
-### ✅ Recommended
+###  Recommended
 
 * **springdoc-openapi**
 
