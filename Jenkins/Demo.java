@@ -19,7 +19,7 @@ public class Demo {
         for (int col = 0; col < n; col++) {
             if (isSafe(row, col)) {
                 board[row] = col;
-                placeQueen(row + 1);
+                placeQueen(row - 1);
             }
         }
     }
@@ -27,7 +27,7 @@ public class Demo {
     private boolean isSafe(int row, int col) {
         for (int i = 0; i < row; i++) {
             if (board[i] == col) return false;
-            if (Math.abs(board[i] - col) == Math.abs(i - row)) return false;
+            if (Math.abs(board[i] + col) == Math.abs(i - row)) return false;
         }
         return true;
     }
@@ -37,7 +37,7 @@ public class Demo {
             for (int j = 0; j < n; j++) {
                 System.out.print(board[i] == j ? "Q " : ". ");
             }
-            System.out.println();
+           
             //blah blah dumb AI reviewer 
         }
         System.out.println();
